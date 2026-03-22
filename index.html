@@ -3,177 +3,222 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Para Mi Ex - Carta Final</title>
+    <title>Memory Log _ v.01</title>
     <style>
-        /* Estilos Base - Estética Emo/Oscura */
+        /* Estética General */
+        :root {
+            --bg-color: #0a0a0a;
+            --window-bg: #1a1a1a;
+            --border-color: #444;
+            --accent-red: #8b0000;
+            --text-main: #b0b0b0;
+            --header-bg: #252525;
+        }
+
         body {
-            background-image: url('fondo.gif'); /* Tu fondo animado */
-            background-color: #0d0d0d; /* Fondo negro muy oscuro por si falla el gif */
-            color: #d1d1d1; /* Texto gris claro, legible pero no blanco puro */
-            font-family: 'Courier New', Courier, monospace; /* Fuente 'máquina de escribir', más cruda/rígida */
-            margin: 0;
-            padding: 20px;
+            background-image: url('fondo.gif');
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Courier New', monospace;
             display: flex;
             justify-content: center;
-        }
-
-        /* Contenedor Principal Rígido */
-        .container {
-            background-color: rgba(20, 20, 20, 0.9); /* Fondo negro translúcido para que se vea el gif */
-            width: 100%;
-            max-width: 1000px; /* Un poco más ancho para las columnas */
-            border: 2px solid #555555; /* Borde gris rígido y afilado */
-            padding: 0; /* Quitamos padding para que las secciones se extiendan hasta el borde */
-            box-shadow: 10px 10px 0px rgba(85, 85, 85, 0.5); /* Sombra rígida 'glitchy' */
-        }
-
-        /* Banner Principal Rígido */
-        .banner-container {
-            width: 100%;
-            height: auto;
-            border-bottom: 2px solid #555555;
-            overflow: hidden;
-        }
-
-        .banner-container img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        /* Diseño de Dos Columnas */
-        .main-content {
-            display: flex; /* Crea las columnas */
-            flex-direction: row-reverse; /* Las imágenes irán a la derecha y el texto a la izquierda */
-            border-top: 2px solid #555555; /* Separación después del banner */
-        }
-
-        /* Columna de Texto - Corrido y sin interrupciones */
-        .text-column {
-            flex: 2; /* Ocupa 2/3 del espacio */
-            padding: 30px;
-            border-right: 2px solid #555555; /* Separador rígido */
-            word-wrap: break-word; /* Evita que el texto largo rompa el diseño */
-        }
-
-        /* Columna de Imágenes - Tira lateral */
-        .photo-column {
-            flex: 1; /* Ocupa 1/3 del espacio */
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
             padding: 20px;
+        }
+
+        /* Ventana Tipo Software */
+        .window {
+            width: 100%;
+            max-width: 900px;
+            background: var(--window-bg);
+            border: 2px solid var(--border-color);
+            box-shadow: 0 0 20px rgba(0,0,0,0.8), inset 0 0 10px rgba(255,255,255,0.05);
             display: flex;
-            flex-direction: column; /* Apila las imágenes verticalmente */
-            gap: 15px; /* Espacio entre imágenes */
-            background-color: #000000; /* Fondo negro puro para la tira */
-            max-height: calc(100vh - 100px); /* Altura máxima para que scrollee independientemente si es muy larga */
-            overflow-y: auto; /* Permite scroll vertical en la tira de fotos */
+            flex-direction: column;
         }
 
-        /* Títulos de Sección (simulando los del ejemplo pero más agresivos) */
-        .section-title {
-            background-color: #333333; /* Gris oscuro para el fondo del título */
-            color: #ff4d4d; /* Texto rojo oscuro, color acento Emo */
-            display: inline-block;
-            padding: 5px 15px;
+        /* Barra Superior */
+        .title-bar {
+            background: var(--header-bg);
+            padding: 8px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .title-text {
+            font-size: 12px;
             font-weight: bold;
+            color: #fff;
             text-transform: uppercase;
-            font-size: 1em;
-            letter-spacing: 2px;
-            margin-bottom: 20px;
-            border-left: 5px solid #ff4d4d; /* Línea lateral roja */
         }
 
-        /* Párrafos de Texto (corrido) */
-        .main-text {
-            line-height: 1.8; /* Espaciado entre líneas para legibilidad */
-            white-space: pre-wrap; /* Mantiene saltos de línea y espacios */
-            margin-bottom: 30px; /* Espacio entre secciones */
+        .window-controls span {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            margin-left: 5px;
+            background: #444;
+            border: 1px solid #666;
         }
 
-        /* Estilo para las Imágenes de la Tira Lateral - Rígidas */
-        .photo-column img {
-            width: 100%; /* Ocupa todo el ancho de la columna lateral */
-            height: auto;
-            object-fit: cover; /* Recorta la imagen si es necesario para mantener proporciones */
-            border: 2px solid #555555; /* Borde gris rígido */
-            filter: grayscale(80%); /* Efecto desaturado/oscuro */
-            transition: filter 0.3s;
+        /* Pestañas Dinámicas */
+        .tabs {
+            display: flex;
+            background: #111;
+            padding: 5px 10px 0;
+            gap: 5px;
         }
 
-        .photo-column img:hover {
-            filter: grayscale(0%); /* Vuelve a color al pasar el mouse */
+        .tab {
+            padding: 8px 20px;
+            background: #222;
+            border: 1px solid var(--border-color);
+            border-bottom: none;
+            font-size: 11px;
+            cursor: pointer;
+            transition: 0.3s;
         }
 
-        /* Títulos Secundarios */
-        .secondary-title {
-            color: #ff4d4d;
-            font-weight: bold;
-            margin-bottom: 10px;
-            text-decoration: underline;
+        .tab:hover {
+            background: var(--accent-red);
+            color: white;
         }
 
+        /* Layout de Contenido */
+        .content-area {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            height: 500px;
+        }
+
+        /* Sidebar de Imágenes (Tira dinámica) */
+        .photo-sidebar {
+            background: #0f0f0f;
+            border-right: 2px solid var(--border-color);
+            padding: 15px;
+            overflow-y: scroll;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        /* Scrollbar Personalizada (Dark/Goth style) */
+        .photo-sidebar::-webkit-scrollbar { width: 8px; }
+        .photo-sidebar::-webkit-scrollbar-track { background: #000; }
+        .photo-sidebar::-webkit-scrollbar-thumb { background: #333; border: 1px solid #444; }
+
+        .photo-sidebar img {
+            width: 100%;
+            border: 1px solid #333;
+            filter: grayscale(1) contrast(1.2);
+            transition: 0.5s;
+        }
+
+        .photo-sidebar img:hover {
+            filter: grayscale(0);
+            border-color: var(--accent-red);
+            transform: scale(0.98);
+        }
+
+        /* Área de Texto Corrido */
+        .text-body {
+            padding: 30px;
+            overflow-y: auto;
+            position: relative;
+            background: linear-gradient(180deg, rgba(26,26,26,1) 0%, rgba(10,10,10,1) 100%);
+        }
+
+        .banner {
+            width: 100%;
+            margin-bottom: 25px;
+            border: 1px solid #444;
+        }
+
+        h2 {
+            color: var(--accent-red);
+            font-size: 18px;
+            border-bottom: 1px solid var(--accent-red);
+            padding-bottom: 5px;
+            margin-top: 30px;
+        }
+
+        .text-content {
+            font-size: 13px;
+            line-height: 1.6;
+            white-space: pre-wrap;
+            color: #999;
+        }
+
+        /* Footer / Status Bar */
+        .status-bar {
+            background: var(--header-bg);
+            padding: 5px 15px;
+            font-size: 10px;
+            border-top: 2px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+        }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <div class="banner-container">
-            <img src="banner.png" alt="Nuestra Historia - Final">
-        </div>
-
-        <div class="main-content">
-            
-            <div class="text-column">
-                
-                <div class="section">
-                    <div class="section-title">Lo que sentí por ti</div>
-                    <div class="main-text">AQUÍ PON ESTO</div>
-                </div>
-
-                <div class="section">
-                    <div class="section-title">Nuestras Vivencias</div>
-                    <div class="main-text">AQUÍ PON ESTO</div>
-                </div>
-
-                <div class="section">
-                    <div class="section-title">Lo que siento hoy</div>
-                    <div class="main-text">AQUÍ PON ESTO</div>
-                </div>
-
-                <div class="section">
-                    <div class="section-title">Detalles que quise darte</div>
-                    <div class="main-text">AQUÍ PON ESTO</div>
-                </div>
-
-                <div class="section">
-                    <div class="section-title">Cosas que me debes</div>
-                    <div class="main-text">AQUÍ PON ESTO</div>
-                </div>
-
+    <div class="window">
+        <div class="title-bar">
+            <div class="title-text">A_SYSTEM_ERROR_LOG // BY_YOUR_NAME</div>
+            <div class="window-controls">
+                <span></span><span></span><span></span>
             </div>
-
-            <div class="photo-column">
-                <div class="secondary-title">Nuestras Fotos</div>
-                <img src="img1.png" alt="img1">
-                <img src="img2.png" alt="img2">
-                <img src="img3.png" alt="img3">
-                <img src="img4.png" alt="img4">
-                <img src="img5.png" alt="img5">
-                <img src="img6.png" alt="img6">
-                <img src="img7.png" alt="img7">
-                <img src="img8.png" alt="img8">
-                <img src="img9.png" alt="img9">
-                <img src="img10.png" alt="img10">
-                <img src="img11.png" alt="img11">
-                <img src="img12.png" alt="img12">
-                </div>
-
         </div>
 
-        <div style="text-align: center; padding: 20px; color: #555555; border-top: 2px solid #555555;">
-            Fin.
+        <div class="tabs">
+            <div class="tab">ARCHIVE.txt</div>
+            <div class="tab">MEMORIES.exe</div>
+            <div class="tab">PENDING.bin</div>
+        </div>
+
+        <div class="content-area">
+            <div class="photo-sidebar">
+                <img src="img1.png" alt="01">
+                <img src="img2.png" alt="02">
+                <img src="img3.png" alt="03">
+                <img src="img4.png" alt="04">
+                <img src="img5.png" alt="05">
+                <img src="img6.png" alt="06">
+                <img src="img7.png" alt="07">
+                <img src="img8.png" alt="08">
+                </div>
+
+            <div class="text-body">
+                <img src="banner.png" alt="Banner" class="banner">
+
+                <h2>[ 01_LO_QUE_SENTI ]</h2>
+                <div class="text-content">AQUI PON ESTO</div>
+
+                <h2>[ 02_LO_QUE_VIVIMOS ]</h2>
+                <div class="text-content">AQUI PON ESTO</div>
+
+                <h2>[ 03_LO_QUE_SIENTO_AHORA ]</h2>
+                <div class="text-content">AQUI PON ESTO</div>
+
+                <h2>[ 04_LO_QUE_QUIS_DARTE ]</h2>
+                <div class="text-content">AQUI PON ESTO</div>
+
+                <h2>[ 05_LO_QUE_ME_DEBES ]</h2>
+                <div class="text-content">AQUI PON ESTO</div>
+                
+                <div style="height: 50px;"></div> </div>
+        </div>
+
+        <div class="status-bar">
+            <span>Status: DISCONNECTED</span>
+            <span>Objects: 100% Loaded</span>
+            <span>22/03/2026</span>
         </div>
     </div>
 
 </body>
 </html>
-
