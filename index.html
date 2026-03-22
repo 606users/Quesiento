@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Memory Log _ v.01</title>
+    <title>Memory Log _ v.01 [BLUE_EDITION]</title>
     <style>
-        /* Estética General */
+        /* Estética General - Paleta Azul Oscura */
         :root {
-            --bg-color: #0a0a0a;
-            --window-bg: #1a1a1a;
-            --border-color: #444;
-            --accent-red: #8b0000;
-            --text-main: #b0b0b0;
-            --header-bg: #252525;
+            --bg-color: #050508;
+            --window-bg: #0d1117;
+            --border-color: #1f2937;
+            --accent-blue: #0088ff; /* Azul vibrante */
+            --text-main: #a1c1e0;   /* Azul claro suave para lectura */
+            --header-bg: #161b22;
         }
 
         body {
@@ -31,10 +31,10 @@
         /* Ventana Tipo Software */
         .window {
             width: 100%;
-            max-width: 900px;
+            max-width: 950px;
             background: var(--window-bg);
             border: 2px solid var(--border-color);
-            box-shadow: 0 0 20px rgba(0,0,0,0.8), inset 0 0 10px rgba(255,255,255,0.05);
+            box-shadow: 0 0 25px rgba(0, 136, 255, 0.15), inset 0 0 10px rgba(0,0,0,0.5);
             display: flex;
             flex-direction: column;
         }
@@ -50,10 +50,11 @@
         }
 
         .title-text {
-            font-size: 12px;
+            font-size: 11px;
             font-weight: bold;
-            color: #fff;
+            color: var(--accent-blue);
             text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .window-controls span {
@@ -61,96 +62,100 @@
             width: 12px;
             height: 12px;
             margin-left: 5px;
-            background: #444;
-            border: 1px solid #666;
+            background: #1f2937;
+            border: 1px solid var(--accent-blue);
         }
 
         /* Pestañas Dinámicas */
         .tabs {
             display: flex;
-            background: #111;
+            background: #090c10;
             padding: 5px 10px 0;
             gap: 5px;
         }
 
         .tab {
             padding: 8px 20px;
-            background: #222;
+            background: #161b22;
             border: 1px solid var(--border-color);
             border-bottom: none;
             font-size: 11px;
+            color: var(--text-main);
             cursor: pointer;
             transition: 0.3s;
         }
 
         .tab:hover {
-            background: var(--accent-red);
+            background: var(--accent-blue);
             color: white;
+            box-shadow: 0 0 10px rgba(0, 136, 255, 0.5);
         }
 
         /* Layout de Contenido */
         .content-area {
             display: grid;
-            grid-template-columns: 250px 1fr;
-            height: 500px;
+            grid-template-columns: 280px 1fr;
+            height: 550px;
         }
 
         /* Sidebar de Imágenes (Tira dinámica) */
         .photo-sidebar {
-            background: #0f0f0f;
+            background: #090c10;
             border-right: 2px solid var(--border-color);
             padding: 15px;
-            overflow-y: scroll;
+            overflow-y: auto;
             display: flex;
             flex-direction: column;
             gap: 15px;
         }
 
-        /* Scrollbar Personalizada (Dark/Goth style) */
-        .photo-sidebar::-webkit-scrollbar { width: 8px; }
-        .photo-sidebar::-webkit-scrollbar-track { background: #000; }
-        .photo-sidebar::-webkit-scrollbar-thumb { background: #333; border: 1px solid #444; }
+        /* Scrollbar Personalizada Azul */
+        .photo-sidebar::-webkit-scrollbar, .text-body::-webkit-scrollbar { width: 6px; }
+        .photo-sidebar::-webkit-scrollbar-track, .text-body::-webkit-scrollbar-track { background: #000; }
+        .photo-sidebar::-webkit-scrollbar-thumb, .text-body::-webkit-scrollbar-thumb { background: var(--accent-blue); border-radius: 10px; }
 
         .photo-sidebar img {
             width: 100%;
-            border: 1px solid #333;
-            filter: grayscale(1) contrast(1.2);
+            border: 1px solid var(--border-color);
+            filter: grayscale(1) brightness(0.7) sepia(1) hue-rotate(180deg) saturate(2); /* Tinte azulado */
             transition: 0.5s;
         }
 
         .photo-sidebar img:hover {
-            filter: grayscale(0);
-            border-color: var(--accent-red);
-            transform: scale(0.98);
+            filter: grayscale(0) brightness(1);
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 15px rgba(0, 136, 255, 0.4);
         }
 
         /* Área de Texto Corrido */
         .text-body {
-            padding: 30px;
+            padding: 35px;
             overflow-y: auto;
-            position: relative;
-            background: linear-gradient(180deg, rgba(26,26,26,1) 0%, rgba(10,10,10,1) 100%);
+            background: linear-gradient(180deg, rgba(13,17,23,1) 0%, rgba(5,5,8,1) 100%);
         }
 
         .banner {
             width: 100%;
             margin-bottom: 25px;
-            border: 1px solid #444;
+            border: 1px solid var(--accent-blue);
+            opacity: 0.8;
         }
 
         h2 {
-            color: var(--accent-red);
-            font-size: 18px;
-            border-bottom: 1px solid var(--accent-red);
+            color: var(--accent-blue);
+            font-size: 16px;
+            border-bottom: 1px solid var(--accent-blue);
             padding-bottom: 5px;
-            margin-top: 30px;
+            margin-top: 40px;
+            text-shadow: 0 0 5px rgba(0, 136, 255, 0.5);
         }
 
         .text-content {
             font-size: 13px;
-            line-height: 1.6;
+            line-height: 1.8;
             white-space: pre-wrap;
-            color: #999;
+            color: var(--text-main);
+            margin-bottom: 20px;
         }
 
         /* Footer / Status Bar */
@@ -158,6 +163,7 @@
             background: var(--header-bg);
             padding: 5px 15px;
             font-size: 10px;
+            color: var(--accent-blue);
             border-top: 2px solid var(--border-color);
             display: flex;
             justify-content: space-between;
@@ -168,54 +174,55 @@
 
     <div class="window">
         <div class="title-bar">
-            <div class="title-text">A_SYSTEM_ERROR_LOG // BY_YOUR_NAME</div>
+            <div class="title-text">SYSTEM_ENCRYPTION_LOG // DATA_RESTORE</div>
             <div class="window-controls">
                 <span></span><span></span><span></span>
             </div>
         </div>
 
         <div class="tabs">
-            <div class="tab">ARCHIVE.txt</div>
-            <div class="tab">MEMORIES.exe</div>
-            <div class="tab">PENDING.bin</div>
+            <div class="tab">SENTIMENTS.log</div>
+            <div class="tab">HISTORY.dat</div>
+            <div class="tab">DEBTS.sys</div>
         </div>
 
         <div class="content-area">
             <div class="photo-sidebar">
-                <img src="img1.png" alt="01">
-                <img src="img2.png" alt="02">
-                <img src="img3.png" alt="03">
-                <img src="img4.png" alt="04">
-                <img src="img5.png" alt="05">
-                <img src="img6.png" alt="06">
-                <img src="img7.png" alt="07">
-                <img src="img8.png" alt="08">
+                <img src="img1.png" alt="img1">
+                <img src="img2.png" alt="img2">
+                <img src="img3.png" alt="img3">
+                <img src="img4.png" alt="img4">
+                <img src="img5.png" alt="img5">
+                <img src="img6.png" alt="img6">
+                <img src="img7.png" alt="img7">
+                <img src="img8.png" alt="img8">
                 </div>
 
             <div class="text-body">
                 <img src="banner.png" alt="Banner" class="banner">
 
-                <h2>[ 01_LO_QUE_SENTI ]</h2>
+                <h2>// 01_RESUMEN_SENTIMENTAL</h2>
                 <div class="text-content">AQUI PON ESTO</div>
 
-                <h2>[ 02_LO_QUE_VIVIMOS ]</h2>
+                <h2>// 02_FRAGMENTOS_COMPARTIDOS</h2>
                 <div class="text-content">AQUI PON ESTO</div>
 
-                <h2>[ 03_LO_QUE_SIENTO_AHORA ]</h2>
+                <h2>// 03_ESTADO_ACTUAL</h2>
                 <div class="text-content">AQUI PON ESTO</div>
 
-                <h2>[ 04_LO_QUE_QUIS_DARTE ]</h2>
+                <h2>// 04_LO_QUE_SE_QUEDO_PENDIENTE</h2>
                 <div class="text-content">AQUI PON ESTO</div>
 
-                <h2>[ 05_LO_QUE_ME_DEBES ]</h2>
+                <h2>// 05_CUENTAS_POR_SALDAR</h2>
                 <div class="text-content">AQUI PON ESTO</div>
                 
-                <div style="height: 50px;"></div> </div>
+                <div style="height: 60px;"></div>
+            </div>
         </div>
 
         <div class="status-bar">
-            <span>Status: DISCONNECTED</span>
-            <span>Objects: 100% Loaded</span>
+            <span>CONNECTION: ENCRYPTED</span>
+            <span>DATA_STREAM: ACTIVE</span>
             <span>22/03/2026</span>
         </div>
     </div>
